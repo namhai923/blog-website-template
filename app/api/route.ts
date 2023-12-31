@@ -8,7 +8,7 @@ import { EmailTemplate } from "@/components/email-template"
 const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY)
 const email = process.env.NEXT_PUBLIC_EMAIL!
 
-export default async function POST(req: Request, res: Response) {
+export async function POST(req: Request, res: Response) {
   const { userEmail, message } = await req.json()
   try {
     const data = await resend.emails.send({
