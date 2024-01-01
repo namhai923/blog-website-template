@@ -8,8 +8,8 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { CommandMenu } from "@/components/command-menu"
-import { BlogCard } from "@/components/blog-card"
 import { getBlogsInfo, getCategories } from "@/sanity/sanity-utils"
+import BlogsTab from "@/components/blogs-tab"
 
 export const revalidate = 10
 export default async function BlogsPage() {
@@ -57,33 +57,15 @@ export default async function BlogsPage() {
           </div>
         </div>
         <Separator className="my-4" />
-
-        <TabsContent
-          value="All"
-          className="border-none p-0 outline-none flex-1"
-        >
-          <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
-            {blogsInfo.map((blogInfo) => (
-              <BlogCard key={blogInfo._id} blogInfo={blogInfo} />
-            ))}
-          </div>
-        </TabsContent>
+        <BlogsTab key="All" category="All" blogsInfo={blogsInfo}></BlogsTab>
         {categories.map((category) => (
-          <TabsContent
+          <BlogsTab
             key={category.title}
-            value={category.title}
-            className="border-none p-0 outline-none"
-          >
-            <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
-              {blogsInfo
-                .filter((blogInfo) =>
-                  blogInfo.categories.includes(category.title)
-                )
-                .map((blogInfo) => (
-                  <BlogCard key={blogInfo._id} blogInfo={blogInfo} />
-                ))}
-            </div>
-          </TabsContent>
+            category={category.title}
+            blogsInfo={blogsInfo.filter((blogInfo) =>
+              blogInfo.categories.includes(category.title)
+            )}
+          ></BlogsTab>
         ))}
       </Tabs>
     </div>
