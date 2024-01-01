@@ -49,7 +49,7 @@ export function HomeSection() {
             <PageHeaderHeading>
               <TypeAnimation
                 sequence={[
-                  "Nguyen Cu",
+                  "Nguyen Hai",
                   1000,
                   "Web Developer",
                   1000,

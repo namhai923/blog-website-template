@@ -23,7 +23,7 @@ export default async function BlogsPage() {
           <PageHeader className="relative pb-4 md:pb-8 lg:pb-12">
             <PageHeaderHeading>All blogs</PageHeaderHeading>
             <PageHeaderDescription>
-              Hand-picked themes that you can copy and paste into your apps.
+              All of your blogs will display here.
             </PageHeaderDescription>
           </PageHeader>
         </TabsContent>
