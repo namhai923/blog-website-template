@@ -3,6 +3,7 @@ import { AboutSection } from "@/components/about-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { LatestBlogsSection } from "@/components/latest-blogs-section"
 import { Separator } from "@/components/ui/separator"
+import { Toaster } from "@/components/ui/sonner"
 
 import { getBlogsInfo } from "@/sanity/sanity-utils"
 
@@ -12,6 +13,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center px-4">
+      <Toaster position="top-center" />
       <div className="container relative space-y-5">
         <HomeSection />
         <Separator />

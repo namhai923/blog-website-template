@@ -2,6 +2,10 @@
 
 import { useState } from "react"
 
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -23,10 +27,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   userEmail: z.string().email({ message: "Invalid email address" }),
@@ -47,7 +48,6 @@ export function ConnectSheet() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
     const JSONdata = JSON.stringify(values)
     const endpoint = "/api"
 
@@ -62,7 +62,7 @@ export function ConnectSheet() {
     const response = await fetch(endpoint, options)
 
     if (response.status === 200) {
-      console.log("Message sent.")
+      toast.success("Message sent. Thank you!")
     }
     setOpen(false)
   }
