@@ -1,8 +1,6 @@
 "use client"
 
-import React, { useRef } from "react"
-
-import { useInView } from "framer-motion"
+import React from "react"
 
 import { PageHeaderHeading } from "./page-header"
 import {
@@ -13,11 +11,8 @@ import "react-vertical-timeline-component/style.min.css"
 import { experiencesData } from "@/lib/data"
 
 export function ExperienceSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.5 })
-
   return (
-    <section ref={ref} className="scroll-mt-28 mb-28 sm:mb-40 text-center">
+    <section className="scroll-mt-28 mb-28 sm:mb-40 text-center">
       <PageHeaderHeading className="pb-10">My experience</PageHeaderHeading>
       <VerticalTimeline
         className="vertical-timeline vertical-timeline-custom-line"
@@ -26,7 +21,6 @@ export function ExperienceSection() {
         {experiencesData.map((item, index) => (
           <React.Fragment key={index}>
             <VerticalTimelineElement
-              visible={isInView}
               contentStyle={{
                 background: "hsl(var(--popover))",
                 boxShadow: "none",
