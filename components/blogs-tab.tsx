@@ -14,7 +14,6 @@ interface BlogsTabProps extends React.HTMLAttributes<HTMLDivElement> {
   category: string
 }
 
-export const revalidate = 10
 export default function BlogsTab({ blogsInfo, category }: BlogsTabProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
@@ -38,7 +37,7 @@ export default function BlogsTab({ blogsInfo, category }: BlogsTabProps) {
             animate={isInView ? "animate" : "initial"}
             transition={{ duration: 0.3, delay: index * 0.4 }}
           >
-            <BlogCard key={blogInfo._id} blogInfo={blogInfo} />
+            <BlogCard key={blogInfo.slug} blogInfo={blogInfo} />
           </motion.li>
         ))}
       </ul>

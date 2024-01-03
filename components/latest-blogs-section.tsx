@@ -36,7 +36,7 @@ export function LatestBlogsSection({ blogsInfo }: Props) {
             animate={isInView ? "animate" : "initial"}
             transition={{ duration: 0.3, delay: index * 0.4 }}
           >
-            <BlogCard key={blogInfo._id} blogInfo={blogInfo} />
+            <BlogCard key={blogInfo.slug} blogInfo={blogInfo} />
           </motion.li>
         ))}
       </ul>

@@ -11,7 +11,7 @@ export const urlFor = (source: any) => {
 export async function getBlogsInfo(): Promise<BlogInfo[]> {
   return createClient(clientConfig).fetch(
     groq`*[_type == 'blog'] | order(_createdAt desc) {
-      _id,
+      "slug": slug.current,
       "mainImage": mainImage,
       "categories": categories[]->title,
       title,
@@ -25,9 +25,9 @@ export async function getBlogsInfo(): Promise<BlogInfo[]> {
   )
 }
 
-export async function getBlog(_id: string): Promise<Blog> {
+export async function getBlog(slug: string): Promise<Blog> {
   return createClient(clientConfig).fetch(
-    groq`*[_type == 'blog' && _id == $_id][0] {
+    groq`*[_type == 'blog' && slug.current == $slug][0] {
       "info": {
         "mainImage": mainImage,
         "categories": categories[]->title,
@@ -41,7 +41,7 @@ export async function getBlog(_id: string): Promise<Blog> {
       },
       content
     }`,
-    { _id }
+    { slug }
   )
 }
 

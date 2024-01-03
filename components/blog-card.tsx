@@ -23,7 +23,7 @@ interface BlogCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function BlogCard({ blogInfo }: BlogCardProps) {
   return (
-    <Link className="" href={`/blogs/${blogInfo._id}`}>
+    <Link className="" href={`/blogs/${blogInfo.slug}`}>
       <Card className="group relative flex flex-col h-full">
         <CardHeader className="p-0">
           <div className="overflow-hidden relative h-60 w-full rounded-t-lg">

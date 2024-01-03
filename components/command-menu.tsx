@@ -61,12 +61,12 @@ export function CommandMenu({ blogsInfo }: CommandMenuProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Blogs' title">
-            {blogsInfo.map((blogInfo) => (
+            {blogsInfo.map((blogInfo, index) => (
               <CommandItem
-                key={blogInfo._id}
+                key={index}
                 value={blogInfo.title}
                 onSelect={() => {
-                  runCommand(() => router.push(`/blogs/${blogInfo._id}`))
+                  runCommand(() => router.push(`/blogs/${blogInfo.slug}`))
                 }}
               >
                 {blogInfo.title}

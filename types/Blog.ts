@@ -7,7 +7,7 @@ export type Blog = {
 }
 
 export type BlogInfo = {
-  _id: string
+  slug: string
   mainImage: any
   categories: string[]
   title: string

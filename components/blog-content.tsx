@@ -23,7 +23,6 @@ interface BlogContentProps extends React.HTMLAttributes<HTMLDivElement> {
   blog: Blog
 }
 
-export const revalidate = 10
 export default function BlogContent({ blog }: BlogContentProps) {
   return (
     <div className="relative">
