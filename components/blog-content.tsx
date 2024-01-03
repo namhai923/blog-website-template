@@ -71,7 +71,7 @@ export default function BlogContent({ blog }: BlogContentProps) {
           </div>
           <PortableText value={blog.content} components={RichText} />
         </article>
-        <div className="top-20 mt-16 w-max self-start px-5 hidden md:sticky md:block">
+        <div className="top-20 mt-16 w-44 self-start px-5 hidden md:sticky md:block">
           <h2 className="mb-4 text-xs font-bold uppercase text-foreground/70">
             Table of Contents
           </h2>
