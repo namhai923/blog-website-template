@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   const blogsInfo = await client.fetch<SanityDocument[]>(BLOGS_INFO_QUERY)
 
   return blogsInfo.map((blogInfo) => ({
-    slug: blogInfo.slug.current,
+    slug: blogInfo.slug,
   }))
 }
 
