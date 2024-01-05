@@ -3,7 +3,7 @@ import { map } from "rxjs"
 
 // Pass 'context' as the second argument
 export const locate: DocumentLocationResolver = (params, context) => {
-  // Set up locations for post documents
+  // Set up locations for blog documents
   if (params.type === "blog") {
     // Subscribe to the latest slug and title
     const doc$ = context.documentStore.listenQuery(
@@ -22,11 +22,11 @@ export const locate: DocumentLocationResolver = (params, context) => {
           locations: [
             {
               title: doc.title || "Untitled",
-              href: `/${doc.slug.current}`,
+              href: `/blogs/${doc.slug.current}`,
             },
             {
               title: "Blogs",
-              href: "/",
+              href: "/blogs",
             },
           ],
         }

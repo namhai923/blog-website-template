@@ -27,6 +27,6 @@ export default function BlogsPreview({
   return blogsInfo !== null && categories !== null ? (
     <Blogs blogsInfo={blogsInfo} categories={categories} />
   ) : (
-    <div className="bg-red-100">No posts found</div>
+    <div className="bg-red-100">No blogs found</div>
   )
 }

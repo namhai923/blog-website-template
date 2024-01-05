@@ -12,7 +12,7 @@ export const RichText = {
           <Image
             priority
             src={urlFor(value).url()}
-            alt="Post image"
+            alt="Blog image"
             fill
             sizes="(min-width: 1000px) 30vw, 50vw"
             style={{ objectFit: "cover" }}
