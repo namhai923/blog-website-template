@@ -1,6 +1,6 @@
 import { SanityDocument } from "next-sanity"
 
-import { HomeSection } from "@/components/home-section"
+import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { LatestBlogsSection } from "@/components/latest-blogs-section"
@@ -19,7 +19,7 @@ export default async function HomePage() {
     <main className="flex flex-col items-center px-4">
       <Toaster position="top-center" />
       <div className="container relative space-y-5">
-        <HomeSection />
+        <HeroSection />
         <Separator />
         <AboutSection />
         <Separator />

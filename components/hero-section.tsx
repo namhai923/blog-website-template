@@ -23,7 +23,7 @@ import { Button } from "./ui/button"
 import { siteConfig } from "@/config/site"
 import heroImage from "@/public/hero-image.jpg"
 
-export function HomeSection() {
+export function HeroSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
 
