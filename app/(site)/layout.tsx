@@ -1,6 +1,7 @@
 import "@/styles/globals.css"
 import "@/styles/themes.css"
 import type { Metadata } from "next"
+import { draftMode } from "next/headers"
 
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
@@ -10,6 +11,7 @@ import { ThemeWrapper } from "@/components/theme-wrapper"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
+import VisualEditing from "@/components/visual-editing"
 
 export const metadata: Metadata = {
   title: {
@@ -45,7 +47,10 @@ export default function RootLayout({
           <ThemeWrapper>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              <div className="flex-1">
+                {children}
+                {draftMode().isEnabled && <VisualEditing />}
+              </div>
               <SiteFooter />
             </div>
           </ThemeWrapper>

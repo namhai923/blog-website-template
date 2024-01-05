@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { SanityDocument } from "next-sanity"
 
 import slug from "slug"
 import { IconChevronLeft } from "@tabler/icons-react"
@@ -13,17 +14,12 @@ import { buttonVariants } from "@/components/ui/button"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 
 import { cn, formatDate } from "@/lib/utils"
-import { urlFor } from "@/sanity/sanity-utils"
+import { urlFor } from "@/sanity/lib/utils"
 
-import { Blog } from "@/types/Blog"
 import { PageHeaderHeading } from "./page-header"
 import { ProgressBar } from "./progress-bar"
 
-interface BlogContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  blog: Blog
-}
-
-export default function BlogContent({ blog }: BlogContentProps) {
+export default function BlogContent({ blog }: { blog: SanityDocument }) {
   return (
     <div className="relative">
       <ProgressBar></ProgressBar>
@@ -78,7 +74,9 @@ export default function BlogContent({ blog }: BlogContentProps) {
           <div className="grid gap-2 border-l-2">
             {blog.content &&
               blog.content
-                .filter((block) => block.style == "h1" || block.style == "h2")
+                .filter(
+                  (block: any) => block.style == "h1" || block.style == "h2"
+                )
                 .map((block: any) => {
                   const headerString = block.children
                     .map((child: any) => child.text)

@@ -1,8 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
+import { SanityDocument } from "next-sanity"
 
 import { formatDate } from "@/lib/utils"
-import { urlFor } from "@/sanity/sanity-utils"
+import { urlFor } from "@/sanity/lib/utils"
 import { IconUser } from "@tabler/icons-react"
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
@@ -15,13 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-import { BlogInfo } from "@/types/Blog"
-
-interface BlogCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  blogInfo: BlogInfo
-}
-
-export function BlogCard({ blogInfo }: BlogCardProps) {
+export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
   return (
     <Link className="" href={`/blogs/${blogInfo.slug}`}>
       <Card className="group relative flex flex-col h-full">

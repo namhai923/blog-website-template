@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { SanityDocument } from "next-sanity"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -14,13 +15,8 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
-import type { BlogInfo } from "@/types/Blog"
 
-interface CommandMenuProps extends React.HTMLAttributes<HTMLDivElement> {
-  blogsInfo: BlogInfo[]
-}
-
-export function CommandMenu({ blogsInfo }: CommandMenuProps) {
+export function CommandMenu({ blogsInfo }: { blogsInfo: SanityDocument[] }) {
   const router = useRouter()
   const [open, setOpen] = React.useState(false)
 
@@ -61,7 +57,7 @@ export function CommandMenu({ blogsInfo }: CommandMenuProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Blogs' title">
-            {blogsInfo.map((blogInfo, index) => (
+            {blogsInfo?.map((blogInfo, index) => (
               <CommandItem
                 key={index}
                 value={blogInfo.title}

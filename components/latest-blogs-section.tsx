@@ -1,15 +1,15 @@
 "use client"
 
 import { useRef } from "react"
+import { SanityDocument } from "next-sanity"
 
 import { motion, useInView } from "framer-motion"
 
-import type { BlogInfo } from "@/types/Blog"
 import { BlogCard } from "./blog-card"
 import { PageHeaderHeading } from "./page-header"
 
 type Props = {
-  blogsInfo: BlogInfo[]
+  blogsInfo: SanityDocument[]
 }
 
 export function LatestBlogsSection({ blogsInfo }: Props) {

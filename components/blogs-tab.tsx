@@ -1,20 +1,20 @@
 "use client"
 
 import { useRef } from "react"
+import { SanityDocument } from "next-sanity"
 
 import { motion, useInView } from "framer-motion"
 
 import { TabsContent } from "@/components/ui/tabs"
 import { BlogCard } from "@/components/blog-card"
 
-import type { BlogInfo } from "@/types/Blog"
-
-interface BlogsTabProps extends React.HTMLAttributes<HTMLDivElement> {
-  blogsInfo: BlogInfo[]
+export default function BlogsTab({
+  blogsInfo,
+  category,
+}: {
+  blogsInfo: SanityDocument[]
   category: string
-}
-
-export default function BlogsTab({ blogsInfo, category }: BlogsTabProps) {
+}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
 
@@ -29,7 +29,7 @@ export default function BlogsTab({ blogsInfo, category }: BlogsTabProps) {
       className="border-none p-0 outline-none flex-1"
     >
       <ul className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-3 md:grid-cols-3">
-        {blogsInfo.map((blogInfo, index) => (
+        {blogsInfo?.map((blogInfo, index) => (
           <motion.li
             key={index}
             variants={cardVariants}

@@ -1,4 +1,4 @@
-import { urlFor } from "@/sanity/sanity-utils"
+import { urlFor } from "@/sanity/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 import slug from "slug"
@@ -72,19 +72,21 @@ export const RichText = {
   },
   marks: {
     link: ({ children, value }: any) => {
-      const rel = !value.href.startsWith("/")
-        ? "noreferrer noopener"
-        : undefined
-      return (
-        <Link
-          href={value.href}
-          target="_blank"
-          rel={rel}
-          className="underline transition-colors text-foreground/80 hover:text-foreground"
-        >
-          {children}
-        </Link>
-      )
+      if (value.href) {
+        const rel = !value.href.startsWith("/")
+          ? "noreferrer noopener"
+          : undefined
+        return (
+          <Link
+            href={value.href}
+            target="_blank"
+            rel={rel}
+            className="underline transition-colors text-foreground/80 hover:text-foreground"
+          >
+            {children}
+          </Link>
+        )
+      }
     },
   },
 }
