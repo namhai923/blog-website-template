@@ -24,6 +24,10 @@ export default async function BlogContentPage({
     perspective: draftMode().isEnabled ? "previewDrafts" : "published",
   })
 
+  if (!blogInitial.data) {
+    return
+  }
+
   return draftMode().isEnabled ? (
     <BlogContentPreview
       blogInitial={blogInitial}

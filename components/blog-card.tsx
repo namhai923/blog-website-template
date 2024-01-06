@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { imagePlaceholder } from "@/lib/data"
 
 export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
   return (
@@ -25,7 +26,11 @@ export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
             <Image
               priority
               className="h-auto w-auto object-cover transition-all group-hover:scale-105 rounded-t-lg"
-              src={urlFor(blogInfo.mainImage).url()}
+              src={
+                blogInfo.mainImage
+                  ? urlFor(blogInfo.mainImage).url()
+                  : imagePlaceholder
+              }
               alt={blogInfo.title}
               fill
               sizes="(min-width: 1000px) 30vw, 50vw"
@@ -35,11 +40,12 @@ export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
         </CardHeader>
         <CardContent className="flex flex-1 flex-col p-4">
           <div className="space-x-2">
-            {blogInfo.categories.map((category: string) => (
-              <Badge key={category} className="rounded-md">
-                {category}
-              </Badge>
-            ))}
+            {blogInfo.categories &&
+              blogInfo.categories.map((category: string) => (
+                <Badge key={category} className="rounded-md">
+                  {category}
+                </Badge>
+              ))}
           </div>
           <h2 className="font-display line-clamp-4 text-2xl font-bold">
             {blogInfo.title}
@@ -58,7 +64,13 @@ export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
                 <TooltipTrigger>
                   {" "}
                   <Avatar>
-                    <AvatarImage src={urlFor(blogInfo.author.image).url()} />
+                    <AvatarImage
+                      src={
+                        blogInfo.author.image
+                          ? urlFor(blogInfo.author.image).url()
+                          : imagePlaceholder
+                      }
+                    />
                     <AvatarFallback>
                       <IconUser />
                     </AvatarFallback>

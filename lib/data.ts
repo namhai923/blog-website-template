@@ -4,24 +4,7 @@ import { IconBriefcase } from "@tabler/icons-react"
 import { IconBrandVisualStudio } from "@tabler/icons-react"
 import { IconSchool } from "@tabler/icons-react"
 
-export const links = [
-  {
-    name: "Home",
-    hash: "#home",
-  },
-  {
-    name: "About",
-    hash: "#about",
-  },
-  {
-    name: "Experience",
-    hash: "#experience",
-  },
-  {
-    name: "Contact",
-    hash: "#contact",
-  },
-] as const
+export const imagePlaceholder = "https://loremflickr.com/320/240/cat"
 
 export const experiencesData = [
   {

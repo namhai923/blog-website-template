@@ -18,8 +18,10 @@ import { urlFor } from "@/sanity/lib/utils"
 
 import { PageHeaderHeading } from "./page-header"
 import { ProgressBar } from "./progress-bar"
+import { imagePlaceholder } from "@/lib/data"
 
 export default function BlogContent({ blog }: { blog: SanityDocument }) {
+  console.log(blog)
   return (
     <div className="relative">
       <ProgressBar></ProgressBar>
@@ -47,7 +49,11 @@ export default function BlogContent({ blog }: { blog: SanityDocument }) {
               <Avatar>
                 <AvatarImage
                   title={`Written by ${blog.info.author.name}`}
-                  src={urlFor(blog.info.author.image).url()}
+                  src={
+                    blog.info.author.image
+                      ? urlFor(blog.info.author.image).url()
+                      : imagePlaceholder
+                  }
                 />
               </Avatar>
               <div className="flex-1 text-left leading-tight">
@@ -58,7 +64,11 @@ export default function BlogContent({ blog }: { blog: SanityDocument }) {
           <div className="overflow-hidden relative h-96 w-full rounded-lg my-3">
             <Image
               priority
-              src={urlFor(blog.info.mainImage).url()}
+              src={
+                blog.info.mainImage
+                  ? urlFor(blog.info.mainImage).url()
+                  : imagePlaceholder
+              }
               alt={blog.info.title}
               fill
               sizes="(min-width: 1000px) 30vw, 50vw"

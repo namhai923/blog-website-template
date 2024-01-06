@@ -1,32 +1,23 @@
 import { SanityDocument } from "next-sanity"
-
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { ExperienceSection } from "@/components/experience-section"
-import { LatestBlogsSection } from "@/components/latest-blogs-section"
-import { Separator } from "@/components/ui/separator"
-import { Toaster } from "@/components/ui/sonner"
+import { draftMode } from "next/headers"
 
 import { loadQuery } from "@/sanity/lib/store"
 import { BLOGS_INFO_QUERY } from "@/sanity/lib/queries"
+import Home from "@/components/home"
+import HomePreview from "@/components/home-preview"
 
 export default async function HomePage() {
-  const { data: blogsInfo } = await loadQuery<SanityDocument[]>(
-    BLOGS_INFO_QUERY
+  const blogsInfoInitial = await loadQuery<SanityDocument[]>(
+    BLOGS_INFO_QUERY,
+    {},
+    {
+      perspective: draftMode().isEnabled ? "previewDrafts" : "published",
+    }
   )
 
-  return (
-    <main className="flex flex-col items-center px-4">
-      <Toaster position="top-center" />
-      <div className="container relative space-y-5">
-        <HeroSection />
-        <Separator />
-        <AboutSection />
-        <Separator />
-        <ExperienceSection />
-        <Separator />
-        <LatestBlogsSection blogsInfo={blogsInfo} />
-      </div>
-    </main>
+  return draftMode().isEnabled ? (
+    <HomePreview blogsInfoInitial={blogsInfoInitial} />
+  ) : (
+    <Home blogsInfo={blogsInfoInitial.data} />
   )
 }

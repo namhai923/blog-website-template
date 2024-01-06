@@ -8,11 +8,11 @@ import { motion, useInView } from "framer-motion"
 import { BlogCard } from "./blog-card"
 import { PageHeaderHeading } from "./page-header"
 
-type Props = {
+export function LatestBlogsSection({
+  blogsInfo,
+}: {
   blogsInfo: SanityDocument[]
-}
-
-export function LatestBlogsSection({ blogsInfo }: Props) {
+}) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
 
