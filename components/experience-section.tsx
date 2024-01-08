@@ -2,6 +2,7 @@
 
 import React from "react"
 
+import { vercelStegaCleanAll } from "@sanity/client/stega"
 import { IconBriefcase, IconSchool, IconTimeline } from "@tabler/icons-react"
 
 import { PageHeaderHeading } from "./page-header"
@@ -27,46 +28,51 @@ export function ExperienceSection({
           lineColor="hsl(var(--secondary))"
         >
           {experienceSection.experienceFields.map(
-            (experience: any, index: number) => (
-              <React.Fragment key={index}>
-                <VerticalTimelineElement
-                  contentStyle={{
-                    background: "hsl(var(--popover))",
-                    boxShadow: "none",
-                    border: "1px solid hsl(var(--border))",
-                    textAlign: "left",
-                    padding: "1.3rem 2rem",
-                  }}
-                  contentArrowStyle={{
-                    borderRight: "0.4rem solid hsl(var(--primary))",
-                  }}
-                  date={experience.experienceTimeLine}
-                  icon={
-                    experience.experienceType === "work" ? (
-                      <IconBriefcase />
-                    ) : experience.experienceType === "education" ? (
-                      <IconSchool />
-                    ) : (
-                      <IconTimeline />
-                    )
-                  }
-                  iconStyle={{
-                    background: "hsl(var(--secondary))",
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  <h3 className="font-semibold capitalize">
-                    {experience.experienceTitle}
-                  </h3>
-                  <p className="font-normal !mt-0">
-                    {experience.experienceLocation}
-                  </p>
-                  <p className="!mt-1 !font-normal text-muted-foreground">
-                    {experience.experienceDescription}
-                  </p>
-                </VerticalTimelineElement>
-              </React.Fragment>
-            )
+            (experience: any, index: number) => {
+              const experienceType =
+                experience.experienceType &&
+                vercelStegaCleanAll(experience.experienceType)
+              return (
+                <React.Fragment key={index}>
+                  <VerticalTimelineElement
+                    contentStyle={{
+                      background: "hsl(var(--popover))",
+                      boxShadow: "none",
+                      border: "1px solid hsl(var(--border))",
+                      textAlign: "left",
+                      padding: "1.3rem 2rem",
+                    }}
+                    contentArrowStyle={{
+                      borderRight: "0.4rem solid hsl(var(--primary))",
+                    }}
+                    date={experience.experienceTimeLine}
+                    icon={
+                      experienceType === "work" ? (
+                        <IconBriefcase />
+                      ) : experienceType === "education" ? (
+                        <IconSchool />
+                      ) : (
+                        <IconTimeline />
+                      )
+                    }
+                    iconStyle={{
+                      background: "hsl(var(--secondary))",
+                      fontSize: "1.5rem",
+                    }}
+                  >
+                    <h3 className="font-semibold capitalize">
+                      {experience.experienceTitle}
+                    </h3>
+                    <p className="font-normal !mt-0">
+                      {experience.experienceLocation}
+                    </p>
+                    <p className="!mt-1 !font-normal text-muted-foreground">
+                      {experience.experienceDescription}
+                    </p>
+                  </VerticalTimelineElement>
+                </React.Fragment>
+              )
+            }
           )}
         </VerticalTimeline>
       )}

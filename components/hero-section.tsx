@@ -4,6 +4,8 @@ import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
+import { vercelStegaCleanAll } from "@sanity/client/stega"
+
 import { TypeAnimation } from "react-type-animation"
 import { motion, useInView } from "framer-motion"
 import {
@@ -49,8 +51,8 @@ export function HeroSection({ heroSection }: { heroSection: any }) {
             <PageHeaderHeading>
               <TypeAnimation
                 sequence={
-                  heroSection.heroTitles
-                    ? heroSection.heroTitles.reduce(
+                  vercelStegaCleanAll(heroSection.heroTitles)
+                    ? vercelStegaCleanAll(heroSection.heroTitles).reduce(
                         (sequence: any, title: string) =>
                           sequence.concat([title, 1000]),
                         []
@@ -66,35 +68,37 @@ export function HeroSection({ heroSection }: { heroSection: any }) {
               {heroSection.heroDescription}
             </PageHeaderDescription>
             <div className="inline-flex space-x-3 justify-center lg:justify-start">
-              {heroSection.heroSocials?.map((social: any, index: number) => (
-                <Button
-                  key={index}
-                  asChild
-                  variant={"default"}
-                  size={"icon"}
-                  className="rounded-full"
-                >
-                  <Link
-                    href={social.socialUrl || "/"}
-                    rel="noreferrer noopener"
-                    target="_blank"
+              {vercelStegaCleanAll(heroSection.heroSocials)?.map(
+                (social: any, index: number) => (
+                  <Button
+                    key={index}
+                    asChild
+                    variant={"default"}
+                    size={"icon"}
+                    className="rounded-full"
                   >
-                    {social.socialType === "instagram" ? (
-                      <IconBrandInstagram className="h-[1.5rem] w-[1.3rem]" />
-                    ) : social.socialType === "youtube" ? (
-                      <IconBrandYoutubeFilled className="h-[1.5rem] w-[1.3rem]" />
-                    ) : social.socialType === "facebook" ? (
-                      <IconBrandFacebook className="h-[1.5rem] w-[1.3rem]" />
-                    ) : social.socialType === "linkedin" ? (
-                      <IconBrandLinkedin className="h-[1.5rem] w-[1.3rem]" />
-                    ) : social.socialType === "x" ? (
-                      <IconBrandX className="h-[1.5rem] w-[1.3rem]" />
-                    ) : (
-                      ""
-                    )}
-                  </Link>
-                </Button>
-              ))}
+                    <Link
+                      href={social.socialUrl || "/"}
+                      rel="noreferrer noopener"
+                      target="_blank"
+                    >
+                      {social.socialType === "instagram" ? (
+                        <IconBrandInstagram className="h-[1.5rem] w-[1.3rem]" />
+                      ) : social.socialType === "youtube" ? (
+                        <IconBrandYoutubeFilled className="h-[1.5rem] w-[1.3rem]" />
+                      ) : social.socialType === "facebook" ? (
+                        <IconBrandFacebook className="h-[1.5rem] w-[1.3rem]" />
+                      ) : social.socialType === "linkedin" ? (
+                        <IconBrandLinkedin className="h-[1.5rem] w-[1.3rem]" />
+                      ) : social.socialType === "x" ? (
+                        <IconBrandX className="h-[1.5rem] w-[1.3rem]" />
+                      ) : (
+                        ""
+                      )}
+                    </Link>
+                  </Button>
+                )
+              )}
             </div>
           </PageHeader>
         </motion.div>
