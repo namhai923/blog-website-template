@@ -18,10 +18,9 @@ import { urlFor } from "@/sanity/lib/utils"
 
 import { PageHeaderHeading } from "./page-header"
 import { ProgressBar } from "./progress-bar"
-import { imagePlaceholder } from "@/lib/data"
+import { imagePlaceholder } from "@/lib/utils"
 
 export default function BlogContent({ blog }: { blog: SanityDocument }) {
-  console.log(blog)
   return (
     <div className="relative">
       <ProgressBar></ProgressBar>
@@ -82,29 +81,28 @@ export default function BlogContent({ blog }: { blog: SanityDocument }) {
             Table of Contents
           </h2>
           <div className="grid gap-2 border-l-2">
-            {blog.content &&
-              blog.content
-                .filter(
-                  (block: any) => block.style == "h1" || block.style == "h2"
+            {blog.content
+              ?.filter(
+                (block: any) => block.style == "h1" || block.style == "h2"
+              )
+              .map((block: any) => {
+                const headerString = block.children
+                  .map((child: any) => child.text)
+                  .join(" ")
+                return (
+                  <ScrollLink
+                    key={`${slug(headerString)}`}
+                    to={`${slug(headerString)}`}
+                    className="-ml-0.5 pl-2 text-xs leading-tight text-foreground/70 cursor-pointer hover:text-foreground hover:border-l-2 hover:border-foreground"
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                    offset={-56}
+                  >
+                    {headerString}
+                  </ScrollLink>
                 )
-                .map((block: any) => {
-                  const headerString = block.children
-                    .map((child: any) => child.text)
-                    .join(" ")
-                  return (
-                    <ScrollLink
-                      key={`${slug(headerString)}`}
-                      to={`${slug(headerString)}`}
-                      className="-ml-0.5 pl-2 text-xs leading-tight text-foreground/70 cursor-pointer hover:text-foreground hover:border-l-2 hover:border-foreground"
-                      spy={true}
-                      smooth={true}
-                      duration={500}
-                      offset={-56}
-                    >
-                      {headerString}
-                    </ScrollLink>
-                  )
-                })}
+              })}
           </div>
         </div>
       </div>

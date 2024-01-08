@@ -6,6 +6,9 @@ import { viewport as studioViewport } from "next-sanity/studio/viewport"
 export const metadata: Metadata = {
   ...studioMetadata,
   title: "Loading Studio...",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export const viewport: Viewport = {

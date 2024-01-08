@@ -20,10 +20,10 @@ import {
   PageHeaderHeading,
 } from "./page-header"
 import { Button } from "./ui/button"
-import { siteConfig } from "@/config/site"
-import heroImage from "@/public/hero-image.jpg"
+import { imagePlaceholder } from "@/lib/utils"
+import { urlFor } from "@/sanity/lib/utils"
 
-export function HeroSection() {
+export function HeroSection({ heroSection }: { heroSection: any }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.5 })
 
@@ -40,58 +40,54 @@ export function HeroSection() {
           initial="initial"
           animate={isInView ? "animate" : "initital"}
           transition={{ duration: 0.5 }}
-          className="grid-cols-1 order-2 lg:order-1 place-self-center justify-self-center text-center lg:text-left"
+          className="grid-cols-1 order-2 lg:order-1 place-self-center justify-self-center text-center lg:text-left w-full"
         >
           <PageHeader>
             <h2 className="text-3xl font-bold text-muted-foreground">
-              Hello, I am
+              {heroSection.heroLabel}
             </h2>
             <PageHeaderHeading>
               <TypeAnimation
-                sequence={[
-                  "Nguyen Hai",
-                  1000,
-                  "Web Developer",
-                  1000,
-                  "Mobile Developer",
-                  1000,
-                  "UI/UX Designer",
-                  1000,
-                ]}
+                sequence={
+                  heroSection.heroTitles
+                    ? heroSection.heroTitles.reduce(
+                        (sequence: any, title: string) =>
+                          sequence.concat([title, 1000]),
+                        []
+                      )
+                    : [1000]
+                }
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
               />
             </PageHeaderHeading>
             <PageHeaderDescription>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-              voluptuous. Lorem ipsum dolor sit amet consectetur adipisicing
-              elit. Quisquam, voluptuous.Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Quisquam, voluptuous.
+              {heroSection.heroDescription}
             </PageHeaderDescription>
             <div className="inline-flex space-x-3 justify-center lg:justify-start">
-              {siteConfig.links.social.map((socialLink) => (
+              {heroSection.heroSocials?.map((social: any, index: number) => (
                 <Button
-                  key={socialLink.value}
+                  key={index}
                   asChild
                   variant={"default"}
                   size={"icon"}
                   className="rounded-full"
                 >
                   <Link
-                    href={socialLink.url}
+                    href={social.socialUrl || "/"}
                     rel="noreferrer noopener"
                     target="_blank"
                   >
-                    {socialLink.value === "instagram" ? (
+                    {social.socialType === "instagram" ? (
                       <IconBrandInstagram className="h-[1.5rem] w-[1.3rem]" />
-                    ) : socialLink.value === "youtube" ? (
+                    ) : social.socialType === "youtube" ? (
                       <IconBrandYoutubeFilled className="h-[1.5rem] w-[1.3rem]" />
-                    ) : socialLink.value === "facebook" ? (
+                    ) : social.socialType === "facebook" ? (
                       <IconBrandFacebook className="h-[1.5rem] w-[1.3rem]" />
-                    ) : socialLink.value === "linkedin" ? (
+                    ) : social.socialType === "linkedin" ? (
                       <IconBrandLinkedin className="h-[1.5rem] w-[1.3rem]" />
-                    ) : socialLink.value === "x" ? (
+                    ) : social.socialType === "x" ? (
                       <IconBrandX className="h-[1.5rem] w-[1.3rem]" />
                     ) : (
                       ""
@@ -112,9 +108,14 @@ export function HeroSection() {
           <Image
             priority
             className="rounded-2xl"
-            src={heroImage}
+            src={
+              heroSection.heroImage
+                ? urlFor(heroSection.heroImage).url()
+                : imagePlaceholder
+            }
             alt="hero image"
             fill
+            sizes="(max-width: 1024px) 100vw, 33vw"
             style={{ objectFit: "cover" }}
           />
         </motion.div>

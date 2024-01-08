@@ -1,5 +1,7 @@
 import { groq } from "next-sanity"
 
+export const MAIN_PAGE_QUERY = groq`*[_type == 'mainPage'][0]`
+
 export const BLOGS_INFO_QUERY = groq`*[_type == 'blog'] | order(_createdAt desc) {
   "slug": slug.current,
   "mainImage": mainImage,

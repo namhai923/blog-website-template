@@ -15,7 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { imagePlaceholder } from "@/lib/data"
+import { imagePlaceholder } from "@/lib/utils"
 
 export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
   return (
@@ -40,12 +40,11 @@ export function BlogCard({ blogInfo }: { blogInfo: SanityDocument }) {
         </CardHeader>
         <CardContent className="flex flex-1 flex-col p-4">
           <div className="space-x-2">
-            {blogInfo.categories &&
-              blogInfo.categories.map((category: string) => (
-                <Badge key={category} className="rounded-md">
-                  {category}
-                </Badge>
-              ))}
+            {blogInfo.categories?.map((category: string) => (
+              <Badge key={category} className="rounded-md">
+                {category}
+              </Badge>
+            ))}
           </div>
           <h2 className="font-display line-clamp-4 text-2xl font-bold">
             {blogInfo.title}

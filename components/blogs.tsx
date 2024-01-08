@@ -65,10 +65,8 @@ export default function Blogs({
           <BlogsTab
             key={category.title}
             category={category.title}
-            blogsInfo={blogsInfo.filter(
-              (blogInfo) =>
-                blogInfo.categories &&
-                blogInfo.categories.includes(category.title)
+            blogsInfo={blogsInfo?.filter((blogInfo) =>
+              blogInfo.categories?.includes(category.title)
             )}
           ></BlogsTab>
         ))}

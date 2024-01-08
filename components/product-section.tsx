@@ -8,9 +8,11 @@ import { motion, useInView } from "framer-motion"
 import { BlogCard } from "./blog-card"
 import { PageHeaderHeading } from "./page-header"
 
-export function LatestBlogsSection({
+export function ProductSection({
+  productSection,
   blogsInfo,
 }: {
+  productSection: any
   blogsInfo: SanityDocument[]
 }) {
   const ref = useRef(null)
@@ -24,7 +26,7 @@ export function LatestBlogsSection({
   return (
     <section ref={ref} id="projects">
       <PageHeaderHeading className="text-center pb-10">
-        Latest blogs
+        {productSection.productLabel}
       </PageHeaderHeading>
 
       <ul className="grid md:grid-cols-3 gap-3 lg:gap-12">

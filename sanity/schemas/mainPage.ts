@@ -17,6 +17,10 @@ export default defineType({
       name: "experienceSection",
       title: "Experience Section",
     },
+    {
+      name: "productSection",
+      title: "Product Section",
+    },
   ],
   fields: [
     defineField({
@@ -49,7 +53,7 @@ export default defineType({
           type: "object",
           fields: [
             {
-              title: "Link",
+              title: "URL / Link",
               name: "socialUrl",
               type: "url",
             },
@@ -130,6 +134,12 @@ export default defineType({
     }),
 
     defineField({
+      name: "experienceLabel",
+      title: "Experience Label",
+      type: "string",
+      group: "experienceSection",
+    }),
+    defineField({
       name: "experienceFields",
       title: "Experience Fields",
       type: "array",
@@ -174,6 +184,13 @@ export default defineType({
         },
       ],
       group: "experienceSection",
+    }),
+
+    defineField({
+      name: "productLabel",
+      title: "Product Label",
+      type: "string",
+      group: "productSection",
     }),
   ],
 })

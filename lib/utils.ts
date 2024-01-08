@@ -17,3 +17,5 @@ export function formatDate(input: string | number): string {
 export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_SITE_URL}${path}`
 }
+
+export const imagePlaceholder = "https://loremflickr.com/320/240/cat" as const
