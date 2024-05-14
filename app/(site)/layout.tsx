@@ -10,8 +10,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { ThemeWrapper } from "@/components/theme-wrapper"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
 import VisualEditing from "@/components/visual-editing"
+
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: {
@@ -46,6 +47,8 @@ export default function RootLayout({
         >
           <ThemeWrapper>
             <div className="relative flex min-h-screen flex-col">
+              <Toaster position="top-center" />
+
               <SiteHeader />
               <div className="flex-1">
                 {children}
@@ -54,7 +57,6 @@ export default function RootLayout({
               <SiteFooter />
             </div>
           </ThemeWrapper>
-          <TailwindIndicator />
         </ThemeProvider>
       </body>
     </html>
