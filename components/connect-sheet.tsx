@@ -5,6 +5,8 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { toast } from "sonner"
+import emailjs from "@emailjs/browser"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -27,7 +29,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { toast } from "sonner"
+
+const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!
+const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!
+const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
 
 const formSchema = z.object({
   userEmail: z.string().email({ message: "Invalid email address" }),
@@ -47,23 +52,16 @@ export function ConnectSheet() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const JSONdata = JSON.stringify(values)
-    const endpoint = "/api"
+  function onSubmit(formValues: z.infer<typeof formSchema>) {
+    emailjs
+      .send(serviceId, templateId, formValues, publicKey)
+      .then(() => {
+        toast.success("Message sent. Thank you!")
+      })
+      .catch((error) => {
+        console.log("FAIL!", error)
+      })
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    }
-
-    const response = await fetch(endpoint, options)
-
-    if (response.status === 200) {
-      toast.success("Message sent. Thank you!")
-    }
     setOpen(false)
   }
 
