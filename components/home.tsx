@@ -5,7 +5,6 @@ import { AboutSection } from "@/components/about-section"
 import { ExperienceSection } from "@/components/experience-section"
 import { ProductSection } from "@/components/product-section"
 import { Separator } from "@/components/ui/separator"
-import { Toaster } from "@/components/ui/sonner"
 
 export default function Home({
   mainPage,
@@ -44,7 +43,6 @@ export default function Home({
 
   return (
     <main className="flex flex-col items-center px-4">
-      <Toaster position="top-center" />
       <div className="container relative space-y-5">
         <HeroSection heroSection={heroSection} />
         <Separator />
