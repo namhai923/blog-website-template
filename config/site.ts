@@ -1,8 +1,5 @@
-const url = process.env.NEXT_PUBLIC_SITE_URL!
-
 export const siteConfig = {
   name: "Akias",
-  url,
   description: "A blog website template",
   links: {
     shadcn: "https://ui.shadcn.com/",
