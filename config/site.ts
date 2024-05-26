@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Akias",
+  name: "Blog Template",
   description: "A blog website template",
   links: {
     shadcn: "https://ui.shadcn.com/",
