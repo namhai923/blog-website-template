@@ -35,7 +35,7 @@ const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!
 const publicKey = process.env.NEXT_PUBLIC_EMAILJS!
 
 const formSchema = z.object({
-  userEmail: z.string().email({ message: "Invalid email address" }),
+  email: z.string().email({ message: "Invalid email address" }),
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
@@ -47,7 +47,7 @@ export function ConnectSheet() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      userEmail: "",
+      email: "",
       message: "",
     },
   })
@@ -88,7 +88,7 @@ export function ConnectSheet() {
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                   control={form.control}
-                  name="userEmail"
+                  name="email"
                   render={({ field }) => (
                     <FormItem className="grid grid-cols-4 items-center gap-4">
                       <FormLabel className="text-left">Email</FormLabel>
